@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as RoomsIndexRouteImport } from './routes/rooms.index'
+import { Route as RoomsRoomIdIndexRouteImport } from './routes/rooms.$roomId.index'
+import { Route as RoomsRoomIdGameRouteImport } from './routes/rooms.$roomId.game'
+import { Route as RoomsRoomIdResultRouteImport } from './routes/rooms.$roomId.result'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoomsIndexRoute = RoomsIndexRouteImport.update({
+  id: '/rooms/',
+  path: '/rooms/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoomsRoomIdIndexRoute = RoomsRoomIdIndexRouteImport.update({
+  id: '/rooms/$roomId/',
+  path: '/rooms/$roomId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoomsRoomIdGameRoute = RoomsRoomIdGameRouteImport.update({
+  id: '/rooms/$roomId/game',
+  path: '/rooms/$roomId/game',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoomsRoomIdResultRoute = RoomsRoomIdResultRouteImport.update({
+  id: '/rooms/$roomId/result',
+  path: '/rooms/$roomId/result',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/rooms/': typeof RoomsIndexRoute
+  '/rooms/$roomId/game': typeof RoomsRoomIdGameRoute
+  '/rooms/$roomId/result': typeof RoomsRoomIdResultRoute
+  '/rooms/$roomId/': typeof RoomsRoomIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/rooms': typeof RoomsIndexRoute
+  '/rooms/$roomId/game': typeof RoomsRoomIdGameRoute
+  '/rooms/$roomId/result': typeof RoomsRoomIdResultRoute
+  '/rooms/$roomId': typeof RoomsRoomIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/rooms/': typeof RoomsIndexRoute
+  '/rooms/$roomId/game': typeof RoomsRoomIdGameRoute
+  '/rooms/$roomId/result': typeof RoomsRoomIdResultRoute
+  '/rooms/$roomId/': typeof RoomsRoomIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/rooms/'
+    | '/rooms/$roomId/game'
+    | '/rooms/$roomId/result'
+    | '/rooms/$roomId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/rooms'
+    | '/rooms/$roomId/game'
+    | '/rooms/$roomId/result'
+    | '/rooms/$roomId'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/register'
+    | '/rooms/'
+    | '/rooms/$roomId/game'
+    | '/rooms/$roomId/result'
+    | '/rooms/$roomId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
+  RoomsIndexRoute: typeof RoomsIndexRoute
+  RoomsRoomIdGameRoute: typeof RoomsRoomIdGameRoute
+  RoomsRoomIdResultRoute: typeof RoomsRoomIdResultRoute
+  RoomsRoomIdIndexRoute: typeof RoomsRoomIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rooms/': {
+      id: '/rooms/'
+      path: '/rooms'
+      fullPath: '/rooms/'
+      preLoaderRoute: typeof RoomsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rooms/$roomId/': {
+      id: '/rooms/$roomId/'
+      path: '/rooms/$roomId'
+      fullPath: '/rooms/$roomId/'
+      preLoaderRoute: typeof RoomsRoomIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rooms/$roomId/game': {
+      id: '/rooms/$roomId/game'
+      path: '/rooms/$roomId/game'
+      fullPath: '/rooms/$roomId/game'
+      preLoaderRoute: typeof RoomsRoomIdGameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rooms/$roomId/result': {
+      id: '/rooms/$roomId/result'
+      path: '/rooms/$roomId/result'
+      fullPath: '/rooms/$roomId/result'
+      preLoaderRoute: typeof RoomsRoomIdResultRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
+  RoomsIndexRoute: RoomsIndexRoute,
+  RoomsRoomIdGameRoute: RoomsRoomIdGameRoute,
+  RoomsRoomIdResultRoute: RoomsRoomIdResultRoute,
+  RoomsRoomIdIndexRoute: RoomsRoomIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
