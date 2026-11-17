@@ -27,3 +27,8 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+## THE NUMBER GAME — frontend (JSX)
+1. `cp .env.example .env` et renseigner les URL du backend Django.
+2. `bun install` puis `bun run dev`.
+Contrat API/WebSocket : `docs/API.md`. Tokens : access en mémoire/session, refresh en cookie HttpOnly si le backend le permet (sinon localStorage, moins sûr face au XSS).
