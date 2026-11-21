@@ -42,12 +42,14 @@ function Result() {
         <Card>
           <h2 className="mb-3 font-semibold">Les 5 manches</h2>
           <ul className="divide-y divide-border text-sm">
+            { console.log("voici le data",data)}
             {data.rounds.map((r) => (
-              <li key={r.number} className="flex items-center gap-3 py-3">
+              <li key={r.round} className="flex items-center gap-3 py-3">
+                { console.log("voici le r",r)}
                 <span className="grid size-8 place-items-center rounded-lg bg-muted font-mono font-bold">{r.number}</span>
                 <div className="flex-1">
                   <p className="flex items-center gap-1 font-medium"><Trophy className="size-3.5 text-warning" />{r.winners?.map((w) => w.username).join(", ") ?? r.winner?.username ?? "—"}</p>
-                  <p className="text-xs text-muted-foreground">Moyenne {fmt(r.average)} × {fmt(r.coefficient)}</p>
+                  <p className="text-xs text-muted-foreground">Moyenne {fmt(r.round)} × {fmt(r.coefficient)}</p>
                 </div>
                 <span className="font-mono font-bold text-secondary">{fmt(r.target)}</span>
               </li>

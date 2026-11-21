@@ -57,7 +57,7 @@ export const PlayerList = ({ players, ownerId, meId }) => (
 );
 
 export function Leaderboard({ players, meId, showRoundStatus = true }) {
-  const sorted = [...players].sort((a, b) => (b.wins ?? 0) - (a.wins ?? 0));
+  const sorted = [...players].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
   return (
     <ol className="space-y-2">
       {sorted.map((p, i) => (
@@ -65,7 +65,7 @@ export function Leaderboard({ players, meId, showRoundStatus = true }) {
           <span className={cn("w-6 text-center font-mono font-bold", i === 0 ? "text-warning" : "text-muted-foreground")}>{i + 1}</span>
           <span className="flex-1 truncate font-medium">{p.username}</span>
           {showRoundStatus && (p.has_submitted ? <Check className="size-4 text-success" aria-label="A soumis" /> : <Clock className="size-4 text-muted-foreground" aria-label="En attente" />)}
-          <span className="flex items-center gap-1 font-mono text-sm font-bold"><Trophy className="size-3.5 text-warning" />{p.wins ?? 0}</span>
+          <span className="flex items-center gap-1 font-mono text-sm font-bold"><Trophy className="size-3.5 text-warning" />{p.score ?? 0}</span>
         </li>
       ))}
     </ol>

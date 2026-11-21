@@ -77,6 +77,7 @@ function Game() {
 }
 
 function SubmitPanel({ roomId, game, onSubmitted }) {
+  console.log("game.round_status", game)
   const left = useCountdown(game.round_status === "open" ? game.ends_at : null);
   const { register, handleSubmit, setError, reset, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(submitNumberSchema) });
   useEffect(() => reset(), [game.round]);
@@ -93,6 +94,7 @@ function SubmitPanel({ roomId, game, onSubmitted }) {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3" noValidate>
+      <span>{left}</span>
       <Input type="number" inputMode="decimal" min={0} max={100} step="any" placeholder="0 – 100" autoFocus className="h-16 text-center font-mono text-3xl" {...register("number")} error={errors.number?.message} />
       <Button type="submit" className="w-full py-4" loading={isSubmitting}><Send className="size-4" />Soumettre</Button>
     </form>

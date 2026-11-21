@@ -28,7 +28,11 @@ export function AuthProvider({ children }) {
 
   const value = useMemo(() => ({
     user, status,
-    login: async (values) => { await authService.login(values); await loadUser(); },
+    login: async (values) => { 
+      await authService.login(values); 
+      await loadUser();
+      
+    },
     register: (values) => authService.register(values),
     logout: async () => { await authService.logout(); setUser(null); setStatus("anonymous"); },
   }), [user, status, loadUser]);

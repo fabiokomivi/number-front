@@ -13,6 +13,8 @@ export function useRoomSocket(roomId, handlers) {
     const socket = createSocket(ENDPOINTS.roomSocket(roomId), {
       onStatus: setStatus,
       onMessage: (msg) => {
+        
+        console.log(msg)
         const payload = msg.payload ?? msg.data ?? msg;
         if (payload?.server_time) syncServerTime(payload.server_time);
         ref.current[msg.type]?.(payload);

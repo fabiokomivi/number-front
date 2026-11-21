@@ -22,7 +22,8 @@ function Register() {
   const onSubmit = async (values) => {
     setServerError("");
     try {
-      await signUp(values);
+      const {password2, ...data} = values
+      await signUp(data);
       await login({ username: values.username, password: values.password });
       toast.success("Compte créé !");
       navigate({ to: "/rooms" });
@@ -39,7 +40,6 @@ function Register() {
         <Input label="Nom d'utilisateur" autoComplete="username" {...register("username")} error={errors.username?.message} />
         <Input label="E-mail" type="email" autoComplete="email" {...register("email")} error={errors.email?.message} />
         <Input label="Mot de passe" type="password" autoComplete="new-password" {...register("password")} error={errors.password?.message} />
-        <Input label="Confirmer le mot de passe" type="password" autoComplete="new-password" {...register("password2")} error={errors.password2?.message} />
         <Button type="submit" className="w-full" loading={isSubmitting}>Créer mon compte</Button>
         <p className="text-center text-sm text-muted-foreground">Déjà inscrit ? <Link to="/login" className="font-semibold text-primary">Se connecter</Link></p>
       </form>

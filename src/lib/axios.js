@@ -2,8 +2,12 @@ import axios from "axios";
 import { API_BASE_URL, ENDPOINTS } from "./config";
 import { tokenStorage } from "./tokenStorage";
 
-export const api = axios.create({ baseURL: API_BASE_URL, withCredentials: true });
-const bare = axios.create({ baseURL: API_BASE_URL, withCredentials: true });
+const headers = {
+  "Content-Type": "application/json"
+}
+
+export const api = axios.create({ baseURL: API_BASE_URL, withCredentials: true, headers:headers });
+const bare = axios.create({ baseURL: API_BASE_URL, withCredentials: true, headers:headers });
 
 let onSessionExpired = () => {};
 export const setSessionExpiredHandler = (fn) => { onSessionExpired = fn; };

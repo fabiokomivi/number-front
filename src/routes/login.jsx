@@ -22,6 +22,7 @@ function Login() {
   const onSubmit = async (values) => {
     setServerError("");
     try {
+      console.log(values)
       await login(values);
       toast.success("Bienvenue !");
       navigate({ to: "/rooms" });

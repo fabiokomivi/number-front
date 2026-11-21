@@ -10,6 +10,7 @@ export const authService = {
   },
   async login(values) {
     const { data } = await api.post(ENDPOINTS.login, values);
+    console.log(data)
     tokenStorage.setAccess(data.access);
     if (data.refresh) tokenStorage.setRefresh(data.refresh);
     return data;
